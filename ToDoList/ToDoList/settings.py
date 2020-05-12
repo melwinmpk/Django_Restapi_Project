@@ -10,7 +10,8 @@ For the full list of settings and their values, see
 https://docs.djangoproject.com/en/3.0/ref/settings/
 """
 
-from DemorestApi.restconf.main import *
+SECRET_KEY = 'wrpr+_*#i5^xn12fcfmm9y4sc52hyl)(tkavej)jtruz9uf1u_'
+from ToDoList.restconf.main import *
 import os
 
 # Build paths inside the project like this: os.path.join(BASE_DIR, ...)
@@ -21,7 +22,7 @@ BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 # See https://docs.djangoproject.com/en/3.0/howto/deployment/checklist/
 
 # SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = 'wrpr+_*#i5^xn12fcfmm9y4sc52hyl)(tkavej)jtruz9uf1u_'
+
 
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True

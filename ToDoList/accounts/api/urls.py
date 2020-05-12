@@ -19,13 +19,13 @@ from rest_framework_simplejwt.views import (
     TokenObtainPairView,
     TokenRefreshView,
 )
-from .views import AuthAPIView, RegisterAPIView
+from .views import RegisterAPIView  # AuthAPIView
 from accounts.api.utils import MyTokenObtainPairSerializer, MyTokenObtainPairView
 
 
 urlpatterns = [
-    path('', AuthAPIView.as_view(), name='token_obtain_pair'), # TokenObtainPairView.as_view()
+    # path('', AuthAPIView.as_view(), name='token_obtain_pair'), # TokenObtainPairView.as_view()
     path('register/', RegisterAPIView.as_view(), name='token_obtain_pair'), # TokenObtainPairView.as_view()
-    path('jwt/', MyTokenObtainPairView.as_view(), name='token_obtain_pair'), # TokenObtainPairView.as_view()
-    path('jwt/refresh/', TokenRefreshView.as_view(), name='token_refresh'),
+    # path('jwt/', MyTokenObtainPairView.as_view(), name='token_obtain_pair'), # TokenObtainPairView.as_view()
+    # path('jwt/refresh/', TokenRefreshView.as_view(), name='token_refresh'),
 ]

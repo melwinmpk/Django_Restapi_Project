@@ -1,5 +1,5 @@
 from datetime import timedelta
-from DemorestApi import settings
+from ToDoList import settings
 # SECRET_KEY = 'y9!q(7d7jx(n2t39tzkq*0af4*i29b+f^sy&p)esxdl9r&+396'
 REST_FRAMEWORK = {
     'DEFAULT_AUTHENTICATION_CLASSES': [
