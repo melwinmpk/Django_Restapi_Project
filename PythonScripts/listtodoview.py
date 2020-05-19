@@ -18,16 +18,16 @@ post_method = requests.post(
 access_token = post_method.json()
 print(access_token['access'])
 
-TODOLISTCREATE_ENDPOINT = "http://127.0.0.1:8000/api/todolist/createtodolist/"
+LISTTODOLISTVIEW_ENDPOINT = "http://127.0.0.1:8000/api/todolist/listdoto/"
 
 post_headers = {
     # "Content-Type": "application/json",
     "Authorization": "Bearer "+access_token['access']
 }
 data = {
-    "TodoListName": "New ToDo List 2"
+    "content": "New ToDo List"
 }
 post_response = requests.post(
-    TODOLISTCREATE_ENDPOINT, data=data, headers=post_headers)
+    LISTTODOLISTVIEW_ENDPOINT, data=data, headers=post_headers)
 
 print(post_response.json())

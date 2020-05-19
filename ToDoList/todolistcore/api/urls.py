@@ -17,9 +17,11 @@ from django.contrib import admin
 from django.urls import path, include
 from django.urls import path, include
 from .views import (
-    CreateTodoAPIView
+    CreateTodoAPIView,
+    ListTodoAPIView
 )
 # from .views import 
 urlpatterns = [
     path('createtodolist/', CreateTodoAPIView.as_view()),
+    path('listdoto/', ListTodoAPIView.as_view())
 ]

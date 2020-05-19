@@ -2,17 +2,17 @@ from django.db import models
 from django.conf import settings
 # Create your models here.
 '''
-TodoList
--> id (Primary)
--> UserId (foreignkey)
--> TodoListName
+    TodoList
+    -> id (Primary)
+    -> UserId (foreignkey)
+    -> TodoListName
 
-Tasks
--> TodoList id (foreign key)
--> Taskname
--> priority order
--> timestamp
--> Stauts
+    Tasks
+    -> TodoList id (foreign key)
+    -> Taskname
+    -> priority order
+    -> timestamp
+    -> Stauts
 
 '''
 

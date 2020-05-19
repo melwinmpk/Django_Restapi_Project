@@ -4,6 +4,7 @@ from rest_framework.response import Response
 from django.shortcuts import get_object_or_404
 from rest_framework import generics, permissions
 from todolistcore.models import TodoList, Tasks
+from .serializers import TodolistSerializer
 import json
 
 
@@ -28,6 +29,15 @@ class CreateTodoAPIView(APIView):
         return Response({"detail": "A new ToDo list got created  "}, status=201)
 
 
+class ListTodoAPIView(APIView):
+    permission_classes = [permissions.IsAuthenticated]
+
+    def post(self, request, *args, **kwargs):
+        qs = TodoList.objects.filter(
+            user=self.request.user).values('todolistname')
+        list_result = [entry['todolistname'] for entry in qs.values()]
+        return Response({"success": "list of data  ", "data": list_result}, status=201)
+        # return Response({"detail": "A new ToDo list got created  "}, status=201)
 
 # class StatusAPIView(mixins.CreateModelMixin,
 #                     generics.ListAPIView):
