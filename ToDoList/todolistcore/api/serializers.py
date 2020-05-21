@@ -13,13 +13,20 @@ class TodolistSerializer(serializers.ModelSerializer,
     class Meta:
         model = TodoList
         fields = [
-            'id',
             'todolistname',
             'user'
         ]
         read_only_fields = ['user']
 
+    def validate(self, data):
+        todolistname = data.get("todolistname", None)
+        if todolistname == "":
+            todolistname = None
+        if todolistname is None:
+            raise serializers.ValidationError(
+                "todolistname required.")
+        return data
 
-class TasksSerializer(serializers.ModelSerializer):
-    pass
+# class TasksSerializer(serializers.ModelSerializer):
+#     pass
 

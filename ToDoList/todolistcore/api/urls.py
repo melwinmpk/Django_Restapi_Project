@@ -18,10 +18,12 @@ from django.urls import path, include
 from django.urls import path, include
 from .views import (
     CreateTodoAPIView,
-    ListTodoAPIView
+    ListTodoAPIView,
+    TodoListSerializerAPIView
 )
 # from .views import 
 urlpatterns = [
     path('createtodolist/', CreateTodoAPIView.as_view()),
-    path('listdoto/', ListTodoAPIView.as_view())
+    path('listdoto/', ListTodoAPIView.as_view()),
+    path('todoserializers/', TodoListSerializerAPIView.as_view())
 ]

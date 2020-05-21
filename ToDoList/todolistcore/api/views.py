@@ -22,7 +22,7 @@ class CreateTodoAPIView(APIView):
 
     def post(self, request, *args, **kwargs):
         data = request.data
-        todoListName = data.get('TodoListName')
+        todoListName = data.get('todolistname')
         subjaectobj = TodoList(todolistname=todoListName,
                                user=self.request.user)
         subjaectobj.save()
@@ -39,14 +39,30 @@ class ListTodoAPIView(APIView):
         return Response({"success": "list of data  ", "data": list_result}, status=201)
         # return Response({"detail": "A new ToDo list got created  "}, status=201)
 
-# class StatusAPIView(mixins.CreateModelMixin,
-#                     generics.ListAPIView):
-#     permission_classes = []
-#     serializer_class   = StatusSerializer
-#     passed_id          = None
+class TodoListSerializerAPIView(mixins.CreateModelMixin,
+                    generics.ListAPIView):
+    # permission_classes = []
+    permission_classes = [permissions.IsAuthenticated]
+    serializer_class   = TodolistSerializer
+    passed_id          = None
 
-#     def post(self, request, *args, **kwargs):
-#         return self.create(request, *args, **kwargs)
+    def get_queryset(self):
+        request = self.request
+        qs = TodoList.objects.filter(
+            user=self.request.user)
+        query = request.GET.get('q')
+        if query is not None:
+            qs = qs.filter(content__icontains=query)
+        return qs
 
-#     def perform_create(self, serializer):
-#         serializer.save(user=self.request.user)
+    def get(self, request, format=None):
+        qs = TodoList.objects.filter(
+            user=self.request.user)
+        serializer_class = TodolistSerializer(qs, many=True)
+        return Response(serializer_class.data)
+
+    def post(self, request, *args, **kwargs):
+        return self.create(request, *args, **kwargs)
+
+    def perform_create(self, serializer):
+        serializer.save(user=self.request.user)
