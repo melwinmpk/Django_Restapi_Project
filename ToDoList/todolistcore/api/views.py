@@ -71,23 +71,27 @@ class TodoListSerializerAPIView(mixins.CreateModelMixin,
 class CreateTaskAPIView(APIView):
     # permission_classes = [permissions.IsAuthenticated]
     def post(self, request, *args, **kwargs):
-        data = request.data
-        id = data.get('id')
+        data     = request.data
+        todolistid = data.get('id')
         taskname = data.get('taskname')
         priority = data.get('priority')
-        '''
-        questionobj = Questions(
-            SubjectId       = SubjectDefinition.objects.get(SubjectId=self.subjectid),
-            Question        = self.Question,
-            Options         = self.options,
-            QuestionTypeId  = QuestionDefinition.objects.get(QuestionTypeId=self.questiontype),
-            Ans             = self.Ans)
-        questionobj.save()
-        '''
+
         subjaectobj = Tasks(
-            todolistid=TodoList.objects.get(id=id),
-            taskname=taskname,
-            priority=priority
+            todolistid=TodoList.objects.get(id=todolistid),
+            taskname   = taskname,
+            priority   = priority
             )
         subjaectobj.save()
         return Response({"detail": "A new Task Got Created  "}, status=201)
+
+
+class ListTasksAPIView(APIView):
+    def post(self, request, *args, **kwargs):
+        data = request.data
+        todolistid = data.get('todolistid')
+        qs = Tasks.objects.filter(
+            todolistid=todolistid)
+        list_result = [entry for entry in qs.values()]
+        return Response({"success": "list of data  ", "data": list_result}, status=201)
+
+
