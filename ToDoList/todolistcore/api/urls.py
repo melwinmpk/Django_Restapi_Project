@@ -19,11 +19,13 @@ from django.urls import path, include
 from .views import (
     CreateTodoAPIView,
     ListTodoAPIView,
+    CreateTaskAPIView,
     TodoListSerializerAPIView
 )
 # from .views import 
 urlpatterns = [
     path('createtodolist/', CreateTodoAPIView.as_view()),
     path('listdoto/', ListTodoAPIView.as_view()),
-    path('todoserializers/', TodoListSerializerAPIView.as_view())
+    path('todoserializers/', TodoListSerializerAPIView.as_view()),
+    path('createtask/', CreateTaskAPIView.as_view())
 ]

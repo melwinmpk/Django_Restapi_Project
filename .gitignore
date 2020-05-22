@@ -1,0 +1,15 @@
+/*.project
+/*.pydevproject
+*.vscode/
+__pycache__
+Include
+Lib
+Scripts
+tcl
+LICENSE.txt
+db.sqlite3
+ToDoList/__pycache__/urls.cpython-38.pyc
+ToDoList/__pycache__
+accounts/__pycache__
+accounts/api/__pycache__
+__pycache__

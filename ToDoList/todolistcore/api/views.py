@@ -18,7 +18,7 @@ def is_json(json_data):
 
 
 class CreateTodoAPIView(APIView):
-    permission_classes = [permissions.IsAuthenticated]
+    # permission_classes = [permissions.IsAuthenticated]
 
     def post(self, request, *args, **kwargs):
         data = request.data
@@ -30,7 +30,7 @@ class CreateTodoAPIView(APIView):
 
 
 class ListTodoAPIView(APIView):
-    permission_classes = [permissions.IsAuthenticated]
+    # permission_classes = [permissions.IsAuthenticated]
 
     def post(self, request, *args, **kwargs):
         qs = TodoList.objects.filter(
@@ -42,7 +42,7 @@ class ListTodoAPIView(APIView):
 class TodoListSerializerAPIView(mixins.CreateModelMixin,
                     generics.ListAPIView):
     # permission_classes = []
-    permission_classes = [permissions.IsAuthenticated]
+    # permission_classes = [permissions.IsAuthenticated]
     serializer_class   = TodolistSerializer
     passed_id          = None
 
@@ -66,3 +66,28 @@ class TodoListSerializerAPIView(mixins.CreateModelMixin,
 
     def perform_create(self, serializer):
         serializer.save(user=self.request.user)
+
+
+class CreateTaskAPIView(APIView):
+    # permission_classes = [permissions.IsAuthenticated]
+    def post(self, request, *args, **kwargs):
+        data = request.data
+        id = data.get('id')
+        taskname = data.get('taskname')
+        priority = data.get('priority')
+        '''
+        questionobj = Questions(
+            SubjectId       = SubjectDefinition.objects.get(SubjectId=self.subjectid),
+            Question        = self.Question,
+            Options         = self.options,
+            QuestionTypeId  = QuestionDefinition.objects.get(QuestionTypeId=self.questiontype),
+            Ans             = self.Ans)
+        questionobj.save()
+        '''
+        subjaectobj = Tasks(
+            todolistid=TodoList.objects.get(id=id),
+            taskname=taskname,
+            priority=priority
+            )
+        subjaectobj.save()
+        return Response({"detail": "A new Task Got Created  "}, status=201)

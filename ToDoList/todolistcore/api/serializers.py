@@ -13,6 +13,7 @@ class TodolistSerializer(serializers.ModelSerializer,
     class Meta:
         model = TodoList
         fields = [
+            'id',
             'todolistname',
             'user'
         ]
