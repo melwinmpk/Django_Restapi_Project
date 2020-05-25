@@ -143,6 +143,30 @@ class TaskListSerializerAPIView(mixins.CreateModelMixin,
         serializer.save(todolistid=TodoList.objects.get(
             id=self.request.data.get("todolistid")))
 
+class UpdateTaskAPIView(APIView):
+    def put(self, request, *args, **kwargs):
+        todolistid = request.data.get("todolistid", None)
+        taskid = request.data.get("taskid", None)
+        qs = TodoList.objects.filter(
+            user=self.request.user).values('todolistname')
+        list_result = [entry['id'] for entry in qs.values()]
+        if int(todolistid) not in list_result:
+            return Response({"detail": "todolistid not found for this user  "}, status=404)
+        Tasks.objects.filter(id=taskid).update(status=True)
+        return Response({"detail": "A Task Got Updated  "}, status=201)
+
+
+class DeleteTaskAPIView(APIView):
+    def delete(self, request, *args, **kwargs):
+        todolistid = request.data.get("todolistid", None)
+        taskid = request.data.get("taskid", None)
+        qs = TodoList.objects.filter(
+            user=self.request.user).values('todolistname')
+        list_result = [entry['id'] for entry in qs.values()]
+        if int(todolistid) not in list_result:
+            return Response({"detail": "todolistid not found for this user  "}, status=404)
+        Tasks.objects.filter(id=taskid).delete()
+        return Response({"detail": "A Task Got Deleted  "}, status=201)
         
 
                                 

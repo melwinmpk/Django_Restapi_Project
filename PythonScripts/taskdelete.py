@@ -19,20 +19,17 @@ access_token = post_method.json()
 print(access_token['access'])
 
 
-TASKCREATE_ENDPOINT = "http://127.0.0.1:8000/api/todolist/createtask/"
+TASKUPDATE_ENDPOINT = "http://127.0.0.1:8000/api/todolist/taskdelete/"
 post_headers = {
     # "Content-Type": "application/json",
     "Authorization": "Bearer "+access_token['access']
 }
 data = {
     "todolistid": 1,
-    "taskname": "Repeat3",
-    "priority": 0
+    "taskid": 11,
 }
 
-post_response = requests.post(
-    TASKCREATE_ENDPOINT, data=data, headers=post_headers)
+post_response = requests.delete(
+    TASKUPDATE_ENDPOINT, data=data, headers=post_headers)
 
 print(post_response.json())
-
-

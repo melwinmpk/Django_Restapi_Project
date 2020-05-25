@@ -22,7 +22,9 @@ from .views import (
     CreateTaskAPIView,
     ListTasksAPIView,
     TodoListSerializerAPIView,
-    TaskListSerializerAPIView
+    TaskListSerializerAPIView,
+    UpdateTaskAPIView,
+    DeleteTaskAPIView
 )
 # from .views import 
 urlpatterns = [
@@ -32,4 +34,6 @@ urlpatterns = [
     path('createtask/', CreateTaskAPIView.as_view()),
     path('listtask/', ListTasksAPIView.as_view()),
     path('tasklistserializers/', TaskListSerializerAPIView.as_view()),
+    path('taskupdate/', UpdateTaskAPIView.as_view()),
+    path('taskdelete/', DeleteTaskAPIView.as_view()),
 ]
