@@ -4,7 +4,7 @@ from rest_framework.response import Response
 from django.shortcuts import get_object_or_404
 from rest_framework import generics, permissions
 from todolistcore.models import TodoList, Tasks
-from .serializers import TodolistSerializer
+from .serializers import TodolistSerializer, TasklistSerializer
 import json
 
 
@@ -41,8 +41,6 @@ class ListTodoAPIView(APIView):
 
 class TodoListSerializerAPIView(mixins.CreateModelMixin,
                     generics.ListAPIView):
-    # permission_classes = []
-    # permission_classes = [permissions.IsAuthenticated]
     serializer_class   = TodolistSerializer
     passed_id          = None
 
@@ -72,9 +70,14 @@ class CreateTaskAPIView(APIView):
     # permission_classes = [permissions.IsAuthenticated]
     def post(self, request, *args, **kwargs):
         data     = request.data
-        todolistid = data.get('id')
+        todolistid = data.get('todolistid')
         taskname = data.get('taskname')
         priority = data.get('priority')
+        qs = TodoList.objects.filter(
+            user=self.request.user).values('todolistname')
+        list_result = [entry['id'] for entry in qs.values()]
+        if int(todolistid) not in list_result:
+            return Response({"detail": "todolistid not found for this user  "}, status=404)
 
         subjaectobj = Tasks(
             todolistid=TodoList.objects.get(id=todolistid),
@@ -89,9 +92,59 @@ class ListTasksAPIView(APIView):
     def post(self, request, *args, **kwargs):
         data = request.data
         todolistid = data.get('todolistid')
+        qs = TodoList.objects.filter(
+            user=self.request.user).values('todolistname')
+        list_result = [entry['id'] for entry in qs.values()]
         qs = Tasks.objects.filter(
             todolistid=todolistid)
+        if int(todolistid) not in list_result:
+            return Response({"detail": "todolistid not found for this user  "}, status=404)
+
         list_result = [entry for entry in qs.values()]
         return Response({"success": "list of data  ", "data": list_result}, status=201)
+
+
+class TaskListSerializerAPIView(mixins.CreateModelMixin,
+                                generics.ListAPIView):
+    serializer_class = TasklistSerializer
+    passed_id = None
+
+    # def get_queryset(self):
+    #     request = self.request
+    #     qs = TodoList.objects.filter(
+    #         user=self.request.user,)
+    #     query = request.GET.get('q')
+    #     if query is not None:
+    #         qs = qs.filter(content__icontains=query)
+    #     return qs
+
+    def get(self, request, format=None):
+        todolistid = request.data.get("todolistid", None)
+        qs = TodoList.objects.filter(
+            user=self.request.user)
+        list_result = [entry['id'] for entry in qs.values()]
+        if int(todolistid) not in list_result:
+            return Response({"detail": "todolistid not found for this user  "}, status=404)
+        qs = Tasks.objects.filter(
+            todolistid=todolistid)
+        serializer_class = TasklistSerializer(qs, many=True)
+        return Response(serializer_class.data)
+
+    def post(self, request, *args, **kwargs):
+        todolistid = request.data.get("todolistid", None)
+        qs = TodoList.objects.filter(
+            user=self.request.user).values('todolistname')
+        list_result = [entry['id'] for entry in qs.values()]
+        if int(todolistid) not in list_result:
+            return Response({"detail": "todolistid not found for this user  "}, status=404)
+        return self.create(request, *args, **kwargs)
+
+    def perform_create(self, serializer):
+        serializer.save(todolistid=TodoList.objects.get(
+            id=self.request.data.get("todolistid")))
+
+        
+
+                                
 
 

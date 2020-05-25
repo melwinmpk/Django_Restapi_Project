@@ -19,6 +19,11 @@ class TodolistSerializer(serializers.ModelSerializer,
         ]
         read_only_fields = ['user']
 
+    def validate_content(self, value):
+        if len(value) > 1000000:
+            raise serializers.ValidationError("This is way too long.")
+        return value
+
     def validate(self, data):
         todolistname = data.get("todolistname", None)
         if todolistname == "":
@@ -28,6 +33,28 @@ class TodolistSerializer(serializers.ModelSerializer,
                 "todolistname required.")
         return data
 
-# class TasksSerializer(serializers.ModelSerializer):
-#     pass
+
+
+class TasklistSerializer(serializers.ModelSerializer,
+                         generics.ListAPIView):
+    class Meta:
+        model = Tasks
+        fields = [
+            'id',
+            'todolistid',
+            'taskname',
+            'priority',
+            'status',
+        ]
+        read_only_fields = ['todolistid']
+
+    def validate(self, data):
+        taskname = data.get("taskname", None)
+        if taskname == "":
+            taskname = None
+        if taskname is None:
+            raise serializers.ValidationError(
+                "taskname required.")
+        return data                         
+
 
