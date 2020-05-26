@@ -24,13 +24,14 @@ post_headers = {
 }
 data = {
     "todolistid": 1,
-    # "taskname": "Repeat3",
-    # "priority": 0
+    "taskname": "Repeat3",
+    "priority": 0
 }
 
-# post_response = requests.post(
-#     TASKListSerializer_ENDPOINT, data=data, headers=post_headers)
+post_response = requests.post(
+    TASKListSerializer_ENDPOINT, data=data, headers=post_headers)
+print(json.dumps(post_response.json(), indent=4, sort_keys=True))
 post_response = requests.get(
     TASKListSerializer_ENDPOINT, data=data, headers=post_headers)
 
-print(post_response.json())
+print(json.dumps(post_response.json(), indent=4, sort_keys=True))

@@ -9,7 +9,13 @@ from rest_framework_simplejwt.settings import api_settings
 expire_delta = api_settings.REFRESH_TOKEN_LIFETIME
 User = get_user_model()
 
-
+class UserPublicSerializer():
+    class Meta:
+        model = User
+        fields = [
+            'id',
+            'username'
+        ]
 class UserRegisterSerializer(serializers.ModelSerializer):
     # password   = serializers.CharField(style={'input_type': 'password'}, write_only=True)
     password2 = serializers.CharField(

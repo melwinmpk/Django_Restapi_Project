@@ -24,7 +24,7 @@ post_headers = {
 }
 data = {
     "todolistid": 1,
-    "id": 16,
+    "id": 18,
     "taskname": "Repeat3",
     "priority": 0,
     "status":True
@@ -33,9 +33,9 @@ data = {
 
 post_response = requests.put(
     TASKSerializer_ENDPOINT, data=data, headers=post_headers)
-print(post_response.status_code)
-print(post_response.json())
+print("Status Code =>",post_response.status_code)
+print(json.dumps(post_response.json(), indent=4, sort_keys=True))
 post_response = requests.delete(
     TASKSerializer_ENDPOINT, data=data, headers=post_headers)
 
-print(post_response.status_code)
+print("Status Code for delete =>", post_response.status_code)

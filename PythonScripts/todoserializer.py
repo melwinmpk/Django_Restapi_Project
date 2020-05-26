@@ -32,7 +32,7 @@ data = {
 post_response = requests.post(
     TODOLISTCREATEserialization_ENDPOINT, data=data, headers=post_headers)
 
-print(post_response.json())
+print(json.dumps(post_response.json(), indent=4, sort_keys=True))
 
 LISTTODOLISTVIEWserialization_ENDPOINT = "http://127.0.0.1:8000/api/todolist/todoserializers/"
 
@@ -47,6 +47,7 @@ data = {
 post_response = requests.get(
     LISTTODOLISTVIEWserialization_ENDPOINT, data=data, headers=post_headers)
 
-print(post_response.json())
+print(json.dumps(post_response.json(), indent=4, sort_keys=True))
+
 
 

@@ -169,6 +169,46 @@ class DeleteTaskAPIView(APIView):
         return Response({"detail": "A Task Got Deleted  "}, status=201)
         
 
+class TaskSerializerAPIView(mixins.DestroyModelMixin,
+                            mixins.UpdateModelMixin,
+                            generics.RetrieveAPIView):
+    serializer_class = TasklistSerializer
+    lookup_field = 'id'
+
+    def get_object(self, *args, **kwargs):  # slug method for handeling the
+        kwargs = self.kwargs
+        kw_id = self.request.data.get('id')
+        qs = Tasks.objects.get(id=kw_id)
+        return qs
+
+    def put(self, request, *args, **kwargs):
+        print(request.data)
+        todolistid = request.data.get("todolistid", None)
+        qs = TodoList.objects.filter(
+            user=self.request.user).values('todolistname')
+        list_result = [entry['id'] for entry in qs.values()]
+        if int(todolistid) not in list_result:
+            return Response({"detail": "todolistid not found for this user  "}, status=404)
+        return self.update(request, *args, **kwargs)
+
+    def patch(self, request, *args, **kwargs):
+        todolistid = request.data.get("todolistid", None)
+        qs = TodoList.objects.filter(
+            user=self.request.user).values('todolistname')
+        list_result = [entry['id'] for entry in qs.values()]
+        if int(todolistid) not in list_result:
+            return Response({"detail": "todolistid not found for this user  "}, status=404)
+        return self.update(request, *args, **kwargs)                            
+    
+    def delete(self, request, *args, **kwargs):
+        todolistid = request.data.get("todolistid", None)
+        qs = TodoList.objects.filter(
+            user=self.request.user).values('todolistname')
+        list_result = [entry['id'] for entry in qs.values()]
+        if int(todolistid) not in list_result:
+            return Response({"detail": "todolistid not found for this user  "}, status=404)
+        return self.destroy(request, *args, **kwargs)
+
                                 
 
 
