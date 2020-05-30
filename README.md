@@ -46,7 +46,7 @@ Users can create an account and create the TODO then add all the task that has t
                     </pre>
                 </li>
             </ul>
-            <h3>Adding header data to all the below mentioed api calls</h3>
+            <h3>Adding header data to all the below mentioned api calls</h3>
             <ul>
                 <li>After Logging/Register we will be getting the access tocken as a response we need to add the access tocken as header to next api call </li>
                 <li><span>Data that needed to be passed as header</span>
