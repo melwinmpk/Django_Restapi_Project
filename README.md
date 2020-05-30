@@ -19,7 +19,7 @@ Users can create an account and create the TODO then add all the task that has t
     </ul>
 <h2>API ENDPOINTS</h2>
         <div class="endpoints_div">
-            <h3>Registeration</h3>
+            <h3>Registeration (Post Method)</h3>
             <ul>
                 <li>EndPoint: <span class="remoteURL">http://127.0.0.1:8000/</span><span>api/accounts/auth/register/</span></li>
                 <li><span>data that needed to be passed </span>
@@ -33,7 +33,7 @@ Users can create an account and create the TODO then add all the task that has t
                     </pre>    
                 </li>
             </ul>
-            <h3>Login</h3>
+            <h3>Login (Post Method)</h3>
             <ul>
                 <li>EndPoint:<span class="remoteURL">http://127.0.0.1:8000/</span><span>api/accounts/auth/</span></li>
                 <li><span>data that needed to be passed </span>
@@ -56,7 +56,7 @@ Users can create an account and create the TODO then add all the task that has t
                     </pre>    
                 </li>
             </ul>
-            <h3>Todo List creation and listing</h3>
+            <h3>Todo List creation and listing (Creation Post method and listing Get Method)</h3>
             <ul>
                 <li>EndPoint:<span class="remoteURL">http://127.0.0.1:8000/</span><span>api/todolist/todoserializers/</span></li>
                 <li><span>data that needed to be passed for todo creation </span>
@@ -67,7 +67,7 @@ Users can create an account and create the TODO then add all the task that has t
                     </pre>
                 </li>
             </ul>    
-            <h3>Task Create and Listing of the task in mentioned todolist</h3>
+            <h3>Task Create and Listing of the task in mentioned todolist (Creation Post method and listing Get Method)</h3>
             <ul>
                 <li>EndPoint:<span class="remoteURL">http://127.0.0.1:8000/</span><span>api/todolist/tasklistserializers/</span></li>
                 <li><span>Data that needed to be passed for Task Creation </span>
@@ -80,7 +80,7 @@ Users can create an account and create the TODO then add all the task that has t
                     </pre>
                 </li>
             </ul>    
-            <h3>Task Delete and Update</h3>
+            <h3>Task Delete and Update (Deletion Delete method and Update Put Method)</h3>
             <ul>
                 <li>EndPoint:<span class="remoteURL">http://127.0.0.1:8000/</span><span>api/todolist/taskserializers/</span></li>
                 <li><span>Data that needed to be passed for Task Update for Task Delete only id is enough</span>
