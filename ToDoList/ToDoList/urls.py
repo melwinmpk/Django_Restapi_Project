@@ -18,6 +18,7 @@ from django.urls import path, include
 
 urlpatterns = [
     path('admin/', admin.site.urls),
+    path('', include('todolistcore.urls')),
     path('api/accounts/auth/', include('accounts.api.urls')),
     path('api/todolist/', include('todolistcore.api.urls')),
 ]

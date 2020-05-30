@@ -20,7 +20,7 @@ Users can create an account and create the TODO then add all the task that has t
     </ul>
 <h2>API ENDPOINTS</h2>
         <div class="endpoints_div">
-            <h3>Registeration (Post Method)</h3>
+            <h3>Registration  (Post Method)</h3>
             <ul>
                 <li>EndPoint: <span class="remoteURL">http://127.0.0.1:8000/</span><span>api/accounts/auth/register/</span></li>
                 <li><span>data that needed to be passed </span>
@@ -40,16 +40,16 @@ Users can create an account and create the TODO then add all the task that has t
                 <li><span>data that needed to be passed </span>
                     <pre>
                                         {
-                                        "username": "tc2@gmail.com", # "admin"
+                                        "username": "tc2@gmail.com",
                                         "password": "1234"
                                         }
                     </pre>
                 </li>
             </ul>
-            <h3>Adding header data to all the below mentioned api calls</h3>
+            <h3>Adding header data to all the below-mentioned API calls</h3>
             <ul>
-                <li>After Logging/Register we will be getting the access tocken as a response we need to add the access tocken as header to next api call </li>
-                <li><span>Data that needed to be passed as header</span>
+                <li>After Logging/Register we will be getting the access token as a response we need to add the access token as header to next API call</li>
+                <li><span>Data that needed to be passed as a header</span>
                     <pre>
                         {
                             "Authorization": "Bearer "+ response_from_login['access']
