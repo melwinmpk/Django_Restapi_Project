@@ -17,3 +17,82 @@ Users can create an account and create the TODO then add all the task that has t
         <li>There will be two list todo and done list</li>
         <li>User can also create multiple todo</li>       
     </ul>
+<h2>API ENDPOINTS</h2>
+        <div class="endpoints_div">
+            <h3>Registeration</h3>
+            <ul>
+                <li>EndPoint: <span class="remoteURL">http://127.0.0.1:8000/</span><span>api/accounts/auth/register/</span></li>
+                <li><span>data that needed to be passed </span>
+                    <pre>
+                        {
+                        "email": "tc2@gmail.com",
+                        "username": "tc2", 
+                        "password": "1234",
+                        "password2": "1234"
+                        }
+                    </pre>    
+                </li>
+            </ul>
+            <h3>Login</h3>
+            <ul>
+                <li>EndPoint:<span class="remoteURL">http://127.0.0.1:8000/</span><span>api/accounts/auth/</span></li>
+                <li><span>data that needed to be passed </span>
+                    <pre>
+                                        {
+                                        "username": "tc2@gmail.com", # "admin"
+                                        "password": "1234"
+                                        }
+                    </pre>
+                </li>
+            </ul>
+            <h3>Adding header data to all the below mentioed api calls</h3>
+            <ul>
+                <li>After Logging/Register we will be getting the access tocken as a response we need to add the access tocken as header to next api call </li>
+                <li><span>Data that needed to be passed as header</span>
+                    <pre>
+                        {
+                            "Authorization": "Bearer "+ response_from_login['access']
+                        }
+                    </pre>    
+                </li>
+            </ul>
+            <h3>Todo List creation and listing</h3>
+            <ul>
+                <li>EndPoint:<span class="remoteURL">http://127.0.0.1:8000/</span><span>api/todolist/todoserializers/</span></li>
+                <li><span>data that needed to be passed for todo creation </span>
+                    <pre>
+                                        {
+                                            "todolistname": "TodoList_name"
+                                        }
+                    </pre>
+                </li>
+            </ul>    
+            <h3>Task Create and Listing of the task in mentioned todolist</h3>
+            <ul>
+                <li>EndPoint:<span class="remoteURL">http://127.0.0.1:8000/</span><span>api/todolist/tasklistserializers/</span></li>
+                <li><span>Data that needed to be passed for Task Creation </span>
+                    <pre>
+                        {
+                                "todolistid": 1,
+                                "taskname": "task_Name",
+                                "priority": 0
+                        }
+                    </pre>
+                </li>
+            </ul>    
+            <h3>Task Delete and Update</h3>
+            <ul>
+                <li>EndPoint:<span class="remoteURL">http://127.0.0.1:8000/</span><span>api/todolist/taskserializers/</span></li>
+                <li><span>Data that needed to be passed for Task Update for Task Delete only id is enough</span>
+                    <pre>
+                        {
+                                    "todolistid": 1,
+                                    "id": 18,
+                                    "taskname": "task_Name",
+                                    "priority": 0,
+                                    "status":True
+                        }
+                    </pre>
+                </li>
+            </ul>
+        </div>
